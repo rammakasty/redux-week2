@@ -18,7 +18,6 @@ const initialState = {
 
 // 리듀서 = 함수다.
 const todosReducer = (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case '추가하기':
             return {

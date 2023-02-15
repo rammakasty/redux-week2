@@ -1,5 +1,35 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
+const StContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px;
+`;
+
+const Stlabel = styled.label`
+    display: flex;
+    gap: 24px;
+`;
+
+const StInput = styled.input`
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+`;
+
+const StTodoItem = styled.div`
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+`;
+
+const StTitle = styled.h1`
+    font-size: 24px;
+    margin-bottom: 16px;
+`;
 
 const App = () => {
     const dispatch = useDispatch();
@@ -13,37 +43,37 @@ const App = () => {
         id: new Date(),
         title: '',
     });
-    return (
-        <div>
-            <label>제목</label>
-            <input
-                type="text"
-                value={todo.title}
-                onChange={({ target: { value: title } }) => {
-                    setTodo((pre) => ({
-                        ...pre,
-                        title,
-                    }));
-                }}
-            />
-            <button
-                onClick={() => {
-                    dispatch({
-                        type: '추가하기',
-                        payload: todo,
-                    });
-                }}
-            >
-                Todo 추가하기
-            </button>
 
-            <br />
-            <br />
-            <h1>Todo!</h1>
-            {todos.map((todo) => (
-                <div key={todo.id}>{todo.title}</div>
-            ))}
-        </div>
+    const handleChange = ({ target: { value: title } }) => {
+        setTodo((pre) => ({
+            ...pre,
+            title,
+        }));
+    };
+    return (
+        <StContainer>
+            <div>
+                <Stlabel>제목</Stlabel>
+                <StInput type="text" value={todo.title} onChange={handleChange} />
+                <button
+                    onClick={() => {
+                        dispatch({
+                            type: '추가하기',
+                            payload: todo,
+                        });
+                    }}
+                >
+                    Todo 추가하기
+                </button>
+            </div>
+
+            <StTitle>Todo!</StTitle>
+            <div>
+                {todos.map((todo) => (
+                    <StTodoItem key={todo.id}>{todo.title}</StTodoItem>
+                ))}
+            </div>
+        </StContainer>
     );
 };
 
