@@ -10,7 +10,6 @@ const App = () => {
     }); // [ ] < 여기에다가 {}를 넣는다.
 
     const [todo, setTodo] = useState({
-        id: Date.now(),
         title: '',
         isDone: false,
     });

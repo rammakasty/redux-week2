@@ -21,8 +21,10 @@ const initialState = [
 const todosReducer = (state = initialState, action) => {
     switch (action.type) {
         case '추가하기':
-            return [...state, action.payload];
+            console.log('추가하기의 콘솔 -> ', action.payload);
+            return [...state, { id: Date.now(), ...action.payload }];
         case '삭제하기':
+            console.log('삭제하기의 콘솔 -> ', action.payload);
             return state.filter((item) => item.id !== action.payload);
         case '업데이트':
             action.payload.isDone = !action.payload.isDone;
